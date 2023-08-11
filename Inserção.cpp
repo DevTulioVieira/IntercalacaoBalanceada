@@ -124,14 +124,6 @@ int main(){
                 }
             }
 
-            // for(i=0; i<filamax; i++){
-            //     if(fila[i].length()>0){
-            //         ativa[i]=0;
-            //     }else{
-            //         ativa[i]=1;
-            //     }
-            // }
-
             cout<<"Comparando Letras"<<endl;
             for(i=0; i<max; i++){ 
                 for(j=0; j<m; j++){
