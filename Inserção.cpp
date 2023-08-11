@@ -32,47 +32,55 @@ int main(){
     for(i=0; i<f; i++){
         fila[i]="";
     }
+    filamax=f/2;//max de fila 
 
     string memoria[m];
     for(i=0; i<m; i++){
         memoria[i]="";
     }
 
-    int contador[m];
-    int ultimo[m];
-    int ativa[m];
-    for(i=0; i<m; i++){
+    int contador[f];
+    int ultimo[f];
+    int ativa[f];
+    for(i=0; i<f; i++){
         contador[i]=0;
         ativa[i]=0;
+        ultimo[i]=0;
     }
 
-    filamax=f/2;//max de fila 
     fim=filamax;//para troca as filas
     meio=m;//max que um bloco pode chegar em ua fila
     max=meio*filamax;//max de um bloco total
     troca=filamax;//para trocar
-
+    if(m>=filamax){
+        m=filamax;
+    }else{
+        cout<<"memoria insuficiente para a Intercalacao Balanceada, favor inserir mais memoria"<<endl;
+        cout<<"Memoria disponivel: "<<m<<" Memoria necessaria: "<<filamax<<endl;
+        system("pause");
+        return 0;
+    }
     for(i=0; i<palavra.length(); i++){
         if(aux<meio){
             //pega os dados na memoria
             mem+=palavra[i];
             aux++;
-            if(aux==meio){
+            if(aux==meio || (i+1)==palavra.length()){
                 //ordena e coloca na fila
                 sort(mem.begin(), mem.end());
                 fila[num]+=mem;
                 mem="";
                 num++;
-                if(num==meio){
+                if(num==filamax){
                     num=0;
                 }
-            aux=0;
+                aux=0;
             }
         }
     }
 
     for(;;){
-        cout<<"\n\nIniciando Insercao"<<endl;
+        cout<<"\n\nIniciando Intercalacao Balanceada"<<endl;
         for(i=0; i<filamax; i++){
             if(fila[i].length()>0){
                 mostra=0;
@@ -94,10 +102,12 @@ int main(){
             for(i=0; i<filamax; i++){
                 contador[i]=0;
                 ativa[i]=0;
+            }
+            for(i=0; i<m; i++){
                 memoria[i]="";
             }
             compara="";
-
+            
             for(i=0; i<filamax; i++){
                 soma+=fila[i].length();
             }
@@ -113,6 +123,14 @@ int main(){
                     ultimo[i]=fila[i].length();
                 }
             }
+
+            // for(i=0; i<filamax; i++){
+            //     if(fila[i].length()>0){
+            //         ativa[i]=0;
+            //     }else{
+            //         ativa[i]=1;
+            //     }
+            // }
 
             cout<<"Comparando Letras"<<endl;
             for(i=0; i<max; i++){ 
@@ -223,7 +241,7 @@ int main(){
         
         }//ultimo for
 
-        cout<<"\n\nFrase ordenada pelo metodo de insecao: ";
+        cout<<"\n\nFrase ordenada pelo metodo de Intercalacao Banlanceada: ";
         cout<<fila[0]<<endl;
 
     return 0;
